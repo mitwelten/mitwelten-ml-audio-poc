@@ -1,5 +1,8 @@
 #!usr/bin/python3
 
+# License:
+# https://fhnw.mit-license.org/
+
 import os
 from flask import Flask, flash, request, redirect, url_for, send_from_directory, render_template, send_file
 from flask_httpauth import HTTPBasicAuth

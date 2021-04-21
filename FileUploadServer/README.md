@@ -28,3 +28,12 @@ URL|Description
 `/uploads/recording_name.wav`|After processing, the result will be shown here.
 `/download/recording_name.wav`|Download the result as `.txt` file
 
+## Run it as a systemd service
+
+```sh
+sudo systemctl daemon-reload
+sudo systemctl enable pyserver.service
+sudo systemctl start pyserver.service
+```
+
+
