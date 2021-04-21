@@ -177,33 +177,33 @@ def upload_file():
             warning="No file found"
             return redirect(request.url)
         file = request.files['file']
-        if file.filename == '':
+        if not file: # or file == None
             warning="No file found"
         else:
-            if not allowed_file(file.filename):
-                warning="Format not supported. Try a <strong>.wav</strong> file"
-            else:
-                if file and allowed_file(file.filename):
+            if file.filename == '':
+                warning="No file found"
+            else: # filename != ''
+                if not allowed_file(file.filename):
+                    warning="Format not supported. Try a <strong>.wav</strong> file"
+                else: # allowed_file
                     filename = secure_filename(file.filename)
                     file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
                     #https://stackoverflow.com/questions/14810795/flask-url-for-generating-http-url-instead-of-https/37842465#37842465
                     return redirect(url_for('uploaded_file',
-                                            filename=filename,_external=True,_scheme="https"))
-        
-    
-    return '''
-    <!doctype html>
-    <html>
-    <title>Upload new File</title>
-
-    <h1>Upload new File</h1>
-    <form method=post enctype=multipart/form-data>
-      <input type=file name=file>
-      <input type=submit value=Upload>
-    </form>
-
-    '''+getWarning(warning)
-
+                                                filename=filename,_external=True,_scheme="https"))
+    else if request.method == 'GET':
+        return '''
+            <!doctype html>
+            <html>
+            <title>Upload new File</title>
+            <h1>Upload new File</h1>
+            <form method=post enctype=multipart/form-data>
+            <input type=file name=file>
+            <input type=submit value=Upload>
+            </form>
+            ''' + getWarning(warning)
+    else:
+        abort(405, 'Method Not Allowed')
 
 # run the server
 if __name__ == '__main__':
