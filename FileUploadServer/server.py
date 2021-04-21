@@ -171,7 +171,18 @@ def downloadFile (filename):
 @auth.login_required
 def upload_file():
     warning=None
-    if request.method == 'POST':
+    if request.method == 'GET':
+        return '''
+            <!doctype html>
+            <html>
+            <title>Upload new File</title>
+            <h1>Upload new File</h1>
+            <form method=post enctype=multipart/form-data>
+            <input type=file name=file>
+            <input type=submit value=Upload>
+            </form>
+            ''' + getWarning(warning)
+    else if request.method == 'POST':
         # check if the post request has the file part
         if 'file' not in request.files:
             warning="No file found"
@@ -191,17 +202,6 @@ def upload_file():
                     #https://stackoverflow.com/questions/14810795/flask-url-for-generating-http-url-instead-of-https/37842465#37842465
                     return redirect(url_for('uploaded_file',
                                                 filename=filename,_external=True,_scheme="https"))
-    else if request.method == 'GET':
-        return '''
-            <!doctype html>
-            <html>
-            <title>Upload new File</title>
-            <h1>Upload new File</h1>
-            <form method=post enctype=multipart/form-data>
-            <input type=file name=file>
-            <input type=submit value=Upload>
-            </form>
-            ''' + getWarning(warning)
     else:
         abort(405, 'Method Not Allowed')
 
