@@ -19,12 +19,20 @@ import warnings
 
 warnings.filterwarnings("ignore")
 
-################### MOVING FILES #######################
+################### REMOVING FILES #######################
 def removeAudioFile(filename):
     if os.path.exists(filename):
         os.remove(filename)
     else:
         print("Could not find file ", filename, " for removal.")
+
+
+def createEmptyFile(filename, output_dir):
+    filename = filename.rsplit("/")[-1].rsplit(".",1)[0]
+    filename+=".BirdNET.selections.txt"
+    f=open(out_dir+"/"+filename, "w")
+    f.write("Unable to open this audiofile")
+    f.close()
 
 
 start = time.process_time()
@@ -424,8 +432,11 @@ def main():
                         test_function,
                     )
                 except:
-                    print("There was an Error with the file ", str(s))
+                    print("Could not read ", str(s))
+                    createEmptyFile(s,result_path)
+                    
                 removeAudioFile(s)
+
         time.sleep(2)
 
 
