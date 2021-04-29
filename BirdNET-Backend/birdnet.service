@@ -1,0 +1,14 @@
+[Unit]
+Description=BirdNET Inference
+After=network.target
+[Service]
+Type=simple
+User=ubuntu
+WorkingDirectory=/home/ubuntu/BirdNET
+ExecStart=/usr/bin/python3 analyze-continuous.py
+Restart=always
+RestartSec=30
+
+
+[Install]
+WantedBy=multi-user.target
