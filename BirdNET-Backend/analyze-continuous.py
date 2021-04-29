@@ -28,14 +28,11 @@ def removeAudioFile(filename):
 
 
 def createEmptyFile(filename, output_dir):
-    log.p(('Error in file: ', filename))
-    filename = filename.rsplit("/")[-1].rsplit(".",1)[0]
-    log.p(('trimmed: ', filename))
+    log.p(("Error in file: ", filename))
+    filename = filename.rsplit("/")[-1].rsplit(".", 1)[0]
 
-    filename+=".BirdNET.selections.txt"
-    log.p(('path: ', output_dir+"/"+filename))
-
-    f=open(output_dir+"/"+filename, "w")
+    filename += ".BirdNET.selections.txt"
+    f = open(output_dir + "/" + filename, "w")
     f.write("Unable to open this audiofile")
     f.close()
 
@@ -438,8 +435,7 @@ def main():
                     )
                 except:
                     print("Could not read ", str(s))
-                    createEmptyFile(s,result_path)
-                    
+                    createEmptyFile(s, result_path)
                 removeAudioFile(s)
 
         time.sleep(2)
