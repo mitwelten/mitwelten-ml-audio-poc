@@ -10,6 +10,7 @@ A simple server based on the [Flask](https://flask.palletsprojects.com/en/1.1.x/
 * [Flask](https://pypi.org/project/Flask/)
 * [Flask-HTTPAuth](https://pypi.org/project/Flask-HTTPAuth/)
 * [Pandas](https://pypi.org/project/pandas/)
+* [Nginx](https://www.nginx.com/)
 
 ## How it works
 
@@ -25,15 +26,15 @@ The URL's are structured as follows
 URL|Description
 -|-
 `/`|Upload files
-`/uploads/recording_name.wav`|After processing, the result will be shown here.
-`/download/recording_name.wav`|Download the result as `.txt` file
+`/results/recording_name.wav`|After processing, the result will be shown here.
+`/download/recording_name.BirdNET.selections.txt`|Download the result as `.txt` file
 
 ## Run it as a systemd service
 
 ```sh
 sudo systemctl daemon-reload
-sudo systemctl enable pyserver.service
-sudo systemctl start pyserver.service
+sudo systemctl enable webserver.service
+sudo systemctl start webserver.service
 ```
 
 
