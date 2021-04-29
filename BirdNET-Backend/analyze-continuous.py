@@ -28,9 +28,14 @@ def removeAudioFile(filename):
 
 
 def createEmptyFile(filename, output_dir):
+    log.p(('Error in file: ', filename))
     filename = filename.rsplit("/")[-1].rsplit(".",1)[0]
+    log.p(('trimmed: ', filename))
+
     filename+=".BirdNET.selections.txt"
-    f=open(out_dir+"/"+filename, "w")
+    log.p(('path: ', output_dir+"/"+filename))
+
+    f=open(output_dir+"/"+filename, "w")
     f.write("Unable to open this audiofile")
     f.close()
 
