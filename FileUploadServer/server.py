@@ -66,14 +66,10 @@ def verify_password(username, password):
         return username
 
 
-@app.route("/favicon.ico", methods=["GET"])
-@auth.login_required
-def favicon_ico():
-    return send_file("favicon.ico")
 
 @app.route("/favicon.png", methods=["GET"])
 @auth.login_required
-def favicon_png():
+def favicon():
     return send_file("favicon.png")
 
 # route for uploading files
