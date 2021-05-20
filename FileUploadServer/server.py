@@ -133,7 +133,7 @@ def show_output(filename):
     if os.path.isfile(result_file_path):
         return get_result_table(result_file_path) + get_download_link(result_filename)
     else:
-        return is_being_processed(filename)
+        return is_being_processed(get_filename_without_extension(filename))
 
 @app.route("/jsonresult/<filename>", methods=["GET"])
 @auth.login_required
@@ -144,7 +144,7 @@ def get_result_in_json(filename):
     if os.path.isfile(result_file_path):
         return get_result_json(result_file_path)
     else:
-        return is_being_processed(filename)
+        return is_being_processed(get_filename_without_extension(filename))
 
 # download the original result
 @app.route("/download/<filename>", methods=["GET"])
@@ -155,7 +155,7 @@ def download_file(filename):
     if os.path.isfile(result_file_path):
         return send_file(result_file_path, as_attachment=True)
     else:
-        return is_being_processed(filename)
+        return is_being_processed(get_filename_without_extension(filename))
 
 
 if __name__ == "__main__":
