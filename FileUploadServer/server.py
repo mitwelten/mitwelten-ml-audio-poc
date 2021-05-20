@@ -25,6 +25,7 @@ from html_helper import (
     get_result_table,
     is_being_processed,
     get_download_link,
+    get_result_json,
 )
 
 
@@ -134,6 +135,16 @@ def show_output(filename):
     else:
         return is_being_processed(filename)
 
+@app.route("/jsonresult/<filename>", methods=["GET"])
+@auth.login_required
+def show_output(filename):
+    filename = secure_filename(filename)
+    result_filename = get_result_filename(filename)
+    result_file_path = RESULT_FOLDER + "/" + result_filename
+    if os.path.isfile(result_file_path):
+        return get_result_json(result_file_path)
+    else:
+        return is_being_processed(filename)
 
 # download the original result
 @app.route("/download/<filename>", methods=["GET"])
