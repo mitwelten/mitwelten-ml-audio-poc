@@ -82,10 +82,10 @@ def upload_file():
         if request.method == "POST":
             # check if the post request has the file part
             if "file" not in request.files:
-                return get_upload_form("No file found")
+                return get_upload_form("No file found"),400
             file = request.files["file"]
             if not file:  # or file == None
-                return get_upload_form("No file found")
+                return get_upload_form("No file found"),400
             else:
                 if file.filename == "":
                     return get_upload_form("No file found")
@@ -93,7 +93,7 @@ def upload_file():
                     if not file_allowed(file.filename):
                         return get_upload_form(
                             "Format not supported. Try a <strong>.wav</strong> file"
-                        )
+                        ),400
                     else:  # allowed_file
                         filename = secure_filename(file.filename)
                         if file_exists(
@@ -105,7 +105,7 @@ def upload_file():
                                 + """"/>"""
                                 + filename
                                 + """</a> already exists. Please rename it."""
-                            )
+                            ),400
                         else:
                             file.save(os.path.join(UPLOAD_FOLDER, filename))
                             # https://stackoverflow.com/questions/14810795/flask-url-for-generating-http-url-instead-of-https/37842465#37842465
@@ -116,7 +116,7 @@ def upload_file():
                                     _external=True,
                                     _scheme="https",
                                 )
-                            )  # <-- still needed with wsgi?
+                            )
         else:
             return abort(405, "Method Not Allowed")
 
