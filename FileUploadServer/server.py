@@ -114,7 +114,7 @@ def upload_file():
                             return redirect(
                                 url_for(
                                     "show_output",
-                                    filename=filename,
+                                    filename=get_filename_without_extension(filename)+".html",
                                     _external=True,
                                     _scheme="https",
                                 )
