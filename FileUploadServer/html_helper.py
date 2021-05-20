@@ -127,6 +127,7 @@ def get_result_json(file_path):
         )  # sort by time and rank
         """
         debuginfo+="---sorted ok---"
-        return df.to_json(index=False)
+        json_data = df.to_json(index=False)
+        return str(len(json_data))
     except:
         return '{"parsingError":"true"}'
