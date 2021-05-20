@@ -134,10 +134,10 @@ def show_output(filename):
         return get_result_table(result_file_path) + get_download_link(result_filename)
     else:
         return is_being_processed(filename)
-"""
+
 @app.route("/jsonresult/<filename>", methods=["GET"])
 @auth.login_required
-def get_json(filename):
+def get_result_in_json(filename):
     filename = secure_filename(filename)
     result_filename = get_result_filename(filename)
     result_file_path = RESULT_FOLDER + "/" + result_filename
@@ -145,7 +145,7 @@ def get_json(filename):
         return get_result_json(result_file_path)
     else:
         return is_being_processed(filename)
-"""
+
 # download the original result
 @app.route("/download/<filename>", methods=["GET"])
 @auth.login_required
