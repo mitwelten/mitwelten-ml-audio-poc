@@ -137,7 +137,7 @@ def show_output(filename):
 
 @app.route("/jsonresult/<filename>", methods=["GET"])
 @auth.login_required
-def show_output(filename):
+def get_json(filename):
     filename = secure_filename(filename)
     result_filename = get_result_filename(filename)
     result_file_path = RESULT_FOLDER + "/" + result_filename
