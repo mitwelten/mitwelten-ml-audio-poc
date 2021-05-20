@@ -1,4 +1,5 @@
 import pandas as pd
+import json
 
 
 def get_upload_form(warning=None):
@@ -121,6 +122,7 @@ def get_result_json(file_path):
     debuginfo = "Filename = "+file_path
     try:
         df = pd.read_csv(file_path, sep="\t")  # Read the file
-        return df.to_json(orient="records")
+        json_data=json.loads(df.to_json(orient="records"))
+        return json.dumps(json_data,indent=4)
     except:
         return '{"parsingError":"true"}'
