@@ -121,9 +121,11 @@ def get_result_json(file_path):
     debuginfo = "Filename = "+file_path
     try:
         df = pd.read_csv(file_path, sep="\t")  # Read the file
+        debuginfo+=str(df)
         df.sort_values(
             ["Begin Time (s)", "Rank"], inplace=True
         )  # sort by time and rank
+        debuginfo+="---sorted ok---"
         return  df.to_json(index=False)
     except:
         return '{"parsingError":"true", "info":"'+debuginfo+'"}'
