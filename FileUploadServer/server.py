@@ -52,6 +52,8 @@ def file_allowed(filename):
 def get_result_filename(filename):
     return filename.rsplit(".", 1)[0] + ".BirdNET.selections.txt"
 
+def get_filename_without_extension(filename):
+    return filename.rsplit(".", 1)[0]
 
 def file_exists(filepath):
     if os.path.isfile(filepath):
@@ -101,7 +103,7 @@ def upload_file():
                         ):
                             return get_upload_form(
                                 """A file with the name  <a href="/result/"""
-                                + filename
+                                + get_filename_without_extension(filename)+".html"
                                 + """"/>"""
                                 + filename
                                 + """</a> already exists. Please rename it."""
